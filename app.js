@@ -2,6 +2,10 @@ var express = require("express");
 var http = require("http");
 var ejs = require('ejs');
 var logger = require('morgan');
+
+//加载路由
+var routes = require('./routes/index');
+// var settings = require('./settings');
 var app = express();
 
 
@@ -10,26 +14,12 @@ app.set("view engine", "ejs");
 // 設置view目錄
 app.set("views", __dirname + "/views");
 
-app.use('/static/v1', express.static('assets'));
 
+app.use('/public/v1', express.static('public'));
 app.use(logger());
 
-app.get("/", function(request, response) {
-    response.render("index.ejs", { message: "I love anime" });   
-});
  
-app.get("/about", function(request, response) {
-    response.end("Welcome to the about page!");
-});
- 
-app.get("/hello/:who", function(request, response) {
-    response.end("Hello, " + request.params.who + ".");    
-});
- 
-app.get("/fraser", function(request, response){
-	response.end("fraser");
-})
- 
+routes(app);
 
 app.get("*", function(request, response) {
 	response.writeHead(404, { "Content-Type": "text/plain;charset=utf-8" });
