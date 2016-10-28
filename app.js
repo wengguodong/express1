@@ -9,7 +9,7 @@ var routes = require('./routes/index');
 // var settings = require('./settings');
 var app = express();
 
-// abc
+// abc11111
 // 設置模板引擎
 app.set("view engine", "ejs");
 // 設置view目錄
