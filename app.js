@@ -2,6 +2,7 @@ var express = require("express");
 var http = require("http");
 var ejs = require('ejs');
 var logger = require('morgan');
+var bodyParser = require('body-parser');
 
 //加载路由
 var routes = require('./routes/index');
@@ -14,6 +15,8 @@ app.set("view engine", "ejs");
 // 設置view目錄
 app.set("views", __dirname + "/views");
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use('/public/v1', express.static('public'));
 app.use(logger());
